@@ -1,0 +1,61 @@
+<project name="Pi_1" default="copy">
+
+    <target name="init">
+        <echo message="Building Pi_1 Project" />
+    </target>
+
+    <target name="create" depends="init">
+        <delete dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\WEB-INF" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\img" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\css" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\js" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\jsp" />
+        <mkdir dir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\other" />
+    </target>
+
+    <target name="copy" depends="create">
+
+        <copy file="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\WEB-INF\web.xml"
+            todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\WEB-INF\" />
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\css\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\css\">
+                <include name="**/*.css"/>
+            </fileset>
+        </copy>
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\js\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\js\">
+                <include name="**/*.js"/>
+            </fileset>
+        </copy>
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\img\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\img\">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\jsp\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\jsp\">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\other\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\other\">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+
+        <copy todir="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_1\">
+            <fileset dir="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_1\">
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+</project>

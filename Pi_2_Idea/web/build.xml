@@ -1,0 +1,53 @@
+<project name="Pi_2_idea" default="copy">
+
+    <target name="init">
+        <echo message="Build Pi_2_Idea Project"/>
+        <property name="server"
+                  value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\"/>
+        <property name="work"
+                  value="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_2_Idea\web\"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <delete verbose="true">
+            <fileset dir="${work}build"/>
+        </delete>
+
+        <javac srcdir="${work}src"
+               destdir="${work}\build"
+               classpath="${server}lib\servlet-api.jar"/>
+    </target>
+
+    <target name="create" depends="compile">
+        <delete dir="${server}webapps\Pi_2_Idea"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\WEB-INF"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\img"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\css"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\js"/>
+        <mkdir dir="${server}webapps\Pi_2_Idea\jsp"/>
+    </target>
+
+    <target name="copy" depends="create">
+        <copy file="${work}WEB-INF\web.xml"
+              todir="${server}webapps\Pi_2_Idea\WEB-INF\"/>
+        <copy todir="${server}webapps\Pi_2_Idea\css\">
+            <fileset dir="${work}css\">
+                <include name="**/*.css"/>
+            </fileset>
+        </copy>
+        <copy todir="${server}webapps\Pi_2_Idea\img\">
+            <fileset dir="${work}img\">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <copy todir="${server}webapps\Pi_2_Idea\">
+            <fileset dir="${work}">
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${server}webapps\Pi_2_Idea\WEB-INF\classes">
+            <fileset dir="${work}build"/>
+        </copy>
+    </target>
+</project>

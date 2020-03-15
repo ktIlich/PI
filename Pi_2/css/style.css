@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #424242;
+    flex-direction: column;
+}
+
+.container h1 {
+    font-family: Arial, sans-serif;
+    color: #D8D8D8;
+}
+
+.links a{
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #D8D8D8;
+}
+
+form{
+    display: inline-block;
+}
+
+.btn_link {
+    background: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    border: none;
+    color: #D8D8D8;
+    text-decoration: underline;
+    padding: 0;
+}
