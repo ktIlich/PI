@@ -1,0 +1,63 @@
+<project name="Pi_3_1" default="copy">
+
+    <target name="init">
+        <echo message="Build Pi_3_1 Project"/>
+        <property name="server"
+                  value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\"/>
+        <property name="server_apps"
+                  value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps"/>
+        <property name="work"
+                  value="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_3_1\web\"/>
+        <property name="work_src"
+                  value="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_3_1\src\"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <delete verbose="true">
+            <fileset dir="${work}build"/>
+        </delete>
+
+        <!-- <javac srcdir="${work}src"
+                destdir="${work}\build"
+                classpath="${server}lib\servlet-api.jar"/>
+ -->
+        <javac srcdir = "${work_src}" destdir = "${work}\build">
+            <classpath>
+                <fileset file="${server}lib\servlet-api.jar" />
+                <fileset dir="${server}commons\" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="create" depends="compile">
+        <delete dir="${server_apps}\Pi_3_1"/>
+        <mkdir dir="${server_apps}\Pi_3_1\"/>
+        <mkdir dir="${server_apps}\Pi_3_1\WEB-INF"/>
+        <mkdir dir="${server_apps}\Pi_3_1\img"/>
+        <mkdir dir="${server_apps}\Pi_3_1\css"/>
+        <mkdir dir="${server_apps}\Pi_3_1\js"/>
+    </target>
+
+    <target name="copy" depends="create">
+        <copy file="${work}WEB-INF\web.xml"
+              todir="${server_apps}\Pi_3_1\WEB-INF\"/>
+        <copy todir="${server_apps}\Pi_3_1\css\">
+            <fileset dir="${work}css\">
+                <include name="**/*.css"/>
+            </fileset>
+        </copy>
+        <copy todir="${server_apps}\Pi_3_1\img\">
+            <fileset dir="${work}img\">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+        <copy todir="${server_apps}\Pi_3_1\">
+            <fileset dir="${work}">
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${server_apps}\Pi_3_1\WEB-INF\classes">
+            <fileset dir="${work}build"/>
+        </copy>
+    </target>
+</project>
