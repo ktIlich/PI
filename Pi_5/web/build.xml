@@ -1,0 +1,59 @@
+<project name="Pi_5" default="copy">
+
+    <target name="init">
+        <echo message="Build Pi_5 Project"/>
+        <property name="server"
+                  value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\"/>
+        <property name="server_app"
+                  value="C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps\Pi_5"/>
+        <property name="work"
+                  value="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_5\web\"/>
+        <property name="work_src"
+                  value="D:\_Labs_3_course\_Labs_2_sem\PI\Pi_5\src\"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <delete verbose="true">
+            <fileset dir="${work}build"/>
+        </delete>
+
+        <javac srcdir="${work_src}" destdir="${work}\build">
+            <classpath>
+                <fileset file="${server}lib\servlet-api.jar"/>
+                <fileset file="${server}lib\jsp-api.jar"/>
+                <fileset dir="${server}commons\" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="create" depends="compile">
+        <delete dir="${server_app}"/>
+        <mkdir dir="${server_app}\"/>
+        <mkdir dir="${server_app}\WEB-INF"/>
+        <mkdir dir="${server_app}\css"/>
+        <mkdir dir="${server_app}\js"/>
+    </target>
+
+    <target name="copy" depends="create">
+        <copy file="${work}WEB-INF\web.xml"
+              todir="${server_app}\WEB-INF\"/>
+        <copy todir="${server_app}\WEB-INF\classes">
+            <fileset dir="${work}build"/>
+        </copy>
+        <copy todir="${server_app}\css\">
+            <fileset dir="${work}css\">
+                <include name="**/*.css"/>
+            </fileset>
+        </copy>
+        <copy todir="${server_app}\">
+            <fileset dir="${work}">
+                <include name="**/*.html"/>
+            </fileset>
+        </copy>
+        <copy todir="${server_app}\">
+            <fileset dir="${work}">
+                <include name="**/*.jsp"/>
+            </fileset>
+        </copy>
+    </target>
+</project>
